@@ -116,7 +116,7 @@ class miniGame{
     this.difficulty = difficulty;
     let nodes = [];
     let connections = [];
-    let nodeNum = Math.ceil(Math.random()*4) + 3 + 3*difficulty;
+    let nodeNum = Math.ceil(Math.random()*3) + 2 + 4*difficulty;
     for(let i=0;i<nodeNum;i++){ nodes.push(0); }
     let connectionNum = Math.ceil(Math.ceil(Math.random()*nodeNum) + (nodeNum/2)*difficulty);
     if(connectionNum+nodeNum > (nodeNum*(nodeNum-1))/2){
