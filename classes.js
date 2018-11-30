@@ -113,6 +113,7 @@ class miniGame{
   }
 
   newGame(difficulty = this.difficulty){ //0-easy, 1-medium, 2-hard
+    this.difficulty = difficulty;
     let nodes = [];
     let connections = [];
     let nodeNum = Math.ceil(Math.random()*4) + 3 + 3*difficulty;
