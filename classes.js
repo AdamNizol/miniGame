@@ -80,7 +80,7 @@ class miniGame{
     for(let i=0;i<this.connections.length;i++){
       let p1 = this.getPos(this.connections[i][0]);
       let p2 = this.getPos(this.connections[i][1]);
-      stroke(color(120,20,20));
+      stroke(color(28, 21, 27));
       strokeWeight(5);
       line(p1.x, p1.y, p2.x, p2.y);
     }
@@ -88,15 +88,15 @@ class miniGame{
 
     push();
     for(let i=0;i<this.nodes.length;i++){
-      stroke(color(80,25,25));
+      stroke(color(28, 21, 27));
       strokeWeight(3);
-      fill(color(180,50,50));
+      fill(color(40, 42, 50));
       let pos = this.getPos(i);
       ellipse(pos.x, pos.y, 60, 60);
 
       strokeWeight(1);
       stroke(color(0,0,0));
-      fill(color(0,0,0));
+      fill(color(250,250,250));
       textSize(26);
       textAlign(CENTER, CENTER);
       text(this.nodes[i].getVal().toString(), pos.x, pos.y);
