@@ -6,7 +6,7 @@ function setup() {
   createCanvas(window.innerWidth,window.innerHeight);
   window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
   noLoop();
-  let nodes = [5, 0, -3, 2, 0, -1, 9, 3, 0];
+  let nodes = [5, 2, -3, 3, -1, 4, -3, 4, -6];
   let connections = [
     [0,1],
     [1,2],
@@ -16,6 +16,10 @@ function setup() {
     [8,2],
     [7,3],
     [6,8],
+    [1,5],
+    [2,4],
+    [5,8],
+    [0,4],
     [3,6]
   ]
   game.loadGame(nodes, connections);
