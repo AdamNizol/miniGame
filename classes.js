@@ -96,9 +96,14 @@ class miniGame{
 
     push();
     for(let i=0;i<this.nodes.length;i++){
-      stroke(color(28, 21, 27));
       strokeWeight(3);
-      fill(color(40, 42, 50));
+      if(this.nodes[i].getVal() < 0){
+        stroke(color(48, 21, 27));
+        fill(color(80, 42, 50));
+      }else{
+        stroke(color(28, 21, 27));
+        fill(color(40, 42, 50));
+      }
       let pos = this.getPos(i);
       ellipse(pos.x, pos.y, 60, 60);
 
