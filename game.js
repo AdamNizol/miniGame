@@ -6,7 +6,7 @@ function setup() {
   createCanvas(window.innerWidth,window.innerHeight);
   window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
   noLoop();
-  let nodes = [5, 2, -3, 3, -1, 4, -3, 4, -6];
+  /*let nodes = [5, 2, -3, 3, -1, 4, -3, 4, -6];
   let connections = [
     [0,1],
     [1,2],
@@ -22,11 +22,12 @@ function setup() {
     [0,4],
     [3,6]
   ]
-  game.loadGame(nodes, connections);
+  game.loadGame(nodes, connections);*/
+  game.newGame();
 }
 function draw() {
   push();
-  background(79, 85, 98);
+  background(200, 200, 225);
   translate(width/2, height/2);
   scale(1);
 
@@ -39,7 +40,6 @@ function mousePressed() {
     x: mouseX-width/2,
     y: mouseY-height/2
   }
-  console.log("click");
   game.clicked(cc, mouseButton);
 }
 

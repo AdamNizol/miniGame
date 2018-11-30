@@ -23,8 +23,13 @@ class miniGame{
   constructor(){
     this.nodes = [];
     this.connections = [];
+    this.difficulty = 1;
   }
   loadGame(nodeArray, connectionPairs){
+    document.getElementById("victoryScreen").style.display = "none";
+    this.nodes = [];
+    this.connections = [];
+
     this.connections = connectionPairs;
     for(let i=0; i<nodeArray.length; i++){
       let temp = new node(nodeArray[i]);
@@ -42,6 +47,9 @@ class miniGame{
     }
     this.nodes[index].setVal(this.nodes[index].getVal() - cons.length*amount);
     draw();
+    if(this.hasWon()){
+      document.getElementById("victoryScreen").style.display = "block";
+    }
   }
   take(index){
     this.give(index, -1);
@@ -104,4 +112,62 @@ class miniGame{
     pop();
   }
 
+  newGame(difficulty = this.difficulty){ //0-easy, 1-medium, 2-hard
+    let nodes = [];
+    let connections = [];
+    let nodeNum = Math.ceil(Math.random()*4) + 3 + 3*difficulty;
+    for(let i=0;i<nodeNum;i++){ nodes.push(0); }
+    let connectionNum = Math.ceil(Math.ceil(Math.random()*nodeNum) + (nodeNum/2)*difficulty);
+    if(connectionNum+nodeNum > (nodeNum*(nodeNum-1))/2){
+      connectionNum = 0;
+    }
+    let spares = connectionNum;
+    for(let i=0; i<nodeNum*5; i++){ //setups random values without changing sum
+      nodes[Math.floor(Math.random()*nodeNum)]++;
+      nodes[Math.floor(Math.random()*nodeNum)]--;
+    }
+    console.log("c: " + connectionNum.toString())
+    console.log(nodeNum)
+    console.log(spares)
+    for(let i=0; i<spares; i++){ //adds spare values at random
+      nodes[Math.floor(Math.random()*nodeNum)]++;
+    }
+
+    //makes a connected graph without any spare connections
+    let connected = [(Math.floor(Math.random()*nodeNum))];
+    for(let i=Math.floor(Math.random()*nodeNum); connected.length<nodeNum;i=Math.floor(Math.random()*nodeNum)){
+      for(let j = 0; j< connected.length; j++){
+        if(connected[j]==i){
+          i=Math.floor(Math.random()*nodeNum);
+          j = -1;
+        }
+      }
+      connections.push([i,connected[Math.floor(Math.random()*connected.length)]])
+      connected.push(i);
+    }
+
+    //adds spare connections
+    for(let i=0;i<connectionNum; i++){
+      let conn = [Math.floor(Math.random()*nodeNum),Math.floor(Math.random()*nodeNum)];
+      for(let j = 0; j<connections.length; j++){
+        if((conn[0] == connections[j][0] && conn[1] == connections[j][1]) || (conn[1] == connections[j][0] && conn[0] == connections[j][1]) || conn[0] == conn[1]){
+          conn = [Math.floor(Math.random()*nodeNum),Math.floor(Math.random()*nodeNum)];
+          j = -1;
+        }
+      }
+      connections.push(conn);
+    }
+
+    this.loadGame(nodes, connections);
+    draw();
+  }
+
+  hasWon(){
+    for(let i=0; i<this.nodes.length; i++){
+      if(this.nodes[i].getVal() < 0){
+        return false;
+      }
+    }
+    return true;
+  }
 }
